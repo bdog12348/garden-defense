@@ -21,4 +21,9 @@ public class NavigationScript : MonoBehaviour
         target = newTarget;
         agent.destination = target.position;
     }
+
+    public void GetTarget()
+    {
+        target = GameObject.Find("Garden").transform;
+    }
 }
