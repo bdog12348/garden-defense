@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         if (gardenHealth <= 0)
         {
-            loader.LoadScene("Game Over Screen");
+            LoseGame();
         }
     }
 
@@ -36,5 +36,16 @@ public class GameManager : MonoBehaviour
         gardenHealth -= amount;
         uiHandler.UpdateGardenHealthUI(gardenHealth);
         Debug.Log($"Garden is at {gardenHealth}");
+    }
+
+    public void WinGame()
+    {
+        loader.LoadScene("You Win Screen");
+
+    }
+    public void LoseGame()
+    {
+        loader.LoadScene("Game Over Screen");
+
     }
 }
