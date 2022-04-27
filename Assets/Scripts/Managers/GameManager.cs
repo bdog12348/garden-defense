@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameSettingsSO GameSettings { get => gameSettings; set => gameSettings = value; }
 
     UIHandler uiHandler;
+    SceneLoader loader;
 
     float gardenHealth;
 
@@ -17,13 +18,17 @@ public class GameManager : MonoBehaviour
     {
         gardenHealth = GameSettings.maxGardenHealth;
         uiHandler = GetComponent<UIHandler>();
+        loader = GetComponent<SceneLoader>();
         uiHandler.Initialize(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (gardenHealth <= 0)
+        {
+            LoseGame();
+        }
     }
 
     public void TakeGardenDamage(float amount)
@@ -31,5 +36,16 @@ public class GameManager : MonoBehaviour
         gardenHealth -= amount;
         uiHandler.UpdateGardenHealthUI(gardenHealth);
         Debug.Log($"Garden is at {gardenHealth}");
+    }
+
+    public void WinGame()
+    {
+        loader.LoadScene("You Win Screen");
+
+    }
+    public void LoseGame()
+    {
+        loader.LoadScene("Game Over Screen");
+
     }
 }

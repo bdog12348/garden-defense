@@ -1,12 +1,16 @@
 {
     "waveData": [
         {
-            "amount": 4,
+            "amount": 5,
             "enemyName": "Enemy"
         },
         {
-            "amount": 2,
+            "amount": 5,
             "enemyName": "BlueEnemy"
+        },
+        {
+            "amount": 5,
+            "enemyName": "Enemy"
         }
     ]
 }

@@ -49,7 +49,16 @@ public class WaveManager : MonoBehaviour
     {
         if (spawnTimer >= gameManager.GameSettings.timeBetweenWaves)
         {
-            SpawnEnemy(GetEnemyFromName(GetNextEnemy()));
+            string nextEnemy = GetNextEnemy();
+            if (nextEnemy.Equals(""))
+            {
+                //Ran out of enemies, you win ig
+                //TODO: Change later to load in next wave json
+                gameManager.WinGame();
+            }else
+            {
+                SpawnEnemy(GetEnemyFromName(nextEnemy));
+            }
             spawnTimer = 0f;
         }else
         {
