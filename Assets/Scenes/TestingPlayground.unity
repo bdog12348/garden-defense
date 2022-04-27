@@ -5043,6 +5043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1829277331}
+  - component: {fileID: 1829277332}
   m_Layer: 8
   m_Name: WepSlot
   m_TagString: Untagged
@@ -5064,6 +5065,22 @@ Transform:
   m_Father: {fileID: 5393215579111688474}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1829277332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829277330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2b3ef4fef04d14986af1da792b7a84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wep: {fileID: 0}
+  CanAttack: 1
+  AttackCooldown: 1
+  isAttacking: 0
 --- !u!1 &1857723134
 GameObject:
   m_ObjectHideFlags: 0
@@ -5449,6 +5466,7 @@ GameObject:
   - component: {fileID: 2003467775}
   - component: {fileID: 2003467774}
   - component: {fileID: 2003467773}
+  - component: {fileID: 2003467779}
   m_Layer: 0
   m_Name: wep1
   m_TagString: Weapon
@@ -5561,6 +5579,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2003467779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003467772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a373074e5fb44c409d135b1df64c2f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wc: {fileID: 0}
 --- !u!114 &2006620068 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8616685848737228376, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
