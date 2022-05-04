@@ -5,22 +5,23 @@ using MoreMountains.Feedbacks;
 
 public class CollisionDetection : MonoBehaviour
 {
-    public WeaponController wc;
     //public GameObject HitParticle;
 
-    public MMFeedbacks killFeedback;
+    public WeaponBase wc;
 
-    private void OnTriggerEnter(Collider other)
+    bool tookDamage = false;
+
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log("entered zone");
-        if (other.tag == "Enemy" && wc.isAttacking)
+        if (other.tag == "Enemy" && wc.isAttacking && !tookDamage)
         {
             Debug.Log(transform.parent);
             Debug.Log(other.name); //see what enemy we're hitting
-            //Instantiate(HitParticle, new Vector3(other.transform.position.x,
-            //transform.position.y, other.transform.position.z), other.transform.rotation);
-            killFeedback.PlayFeedbacks(other.transform.position);
-            Destroy(other);
+            other.GetComponent<HealthScript>().TakeDamage(wc.GetDamage());
+            tookDamage = true;
+        }else if (wc.isAttacking == false)
+        {
+            tookDamage = false;
         }
     }
 

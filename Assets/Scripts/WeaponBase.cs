@@ -4,12 +4,12 @@ using UnityEngine;
 
 public abstract class WeaponBase : MonoBehaviour
 {
-    public GameObject wep;
+    //public GameObject wep;
+    public bool isAttacking = false;
+
     protected bool CanAttack = true;
     protected float AttackCooldown = 1.0f;
-    protected bool isAttacking = false;
-
-    protected float Damage;
+    [SerializeField] protected float Damage;
 
     // Update is called once per frame
     void Update()
@@ -19,12 +19,22 @@ public abstract class WeaponBase : MonoBehaviour
             if (CanAttack)
             {
                 WepAttack();
+                StartCoroutine(ResetAttackCooldown());
             }
         }
     }
 
+    public float GetDamage()
+    {
+        return Damage;
+    }
+
      //add animation and audio here later
-    public abstract void WepAttack();
+    public virtual void WepAttack()
+    {
+        isAttacking = true;
+        CanAttack = false;
+    }
 
     IEnumerator ResetAttackCooldown()
     {
@@ -32,6 +42,4 @@ public abstract class WeaponBase : MonoBehaviour
         isAttacking = false;
         CanAttack = true;
     }
-    protected float attackCooldown;
-
 }

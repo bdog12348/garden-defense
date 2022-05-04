@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    public WeaponBase weapon;
+
     // Start is called before the first frame update
     void Start()
     {

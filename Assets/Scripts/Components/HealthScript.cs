@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class HealthScript : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent Died;
+
+
+    public MMFeedbacks killFeedback;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,7 @@ public class HealthScript : MonoBehaviour
             Debug.LogError("Damage must be greater than 0");
             return;
         }
+        Debug.Log($"Took damage {amount}");
 
         health -= amount;
     }
@@ -58,6 +63,10 @@ public class HealthScript : MonoBehaviour
     public void Die()
     {
         Died.Invoke();
+        Debug.Log($"{gameObject.name} died");
+        //Instantiate(HitParticle, new Vector3(other.transform.position.x,
+        //transform.position.y, other.transform.position.z), other.transform.rotation);
+        //killFeedback.PlayFeedbacks(transform.position);
         Destroy(gameObject);
     }
 }
