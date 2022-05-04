@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestingPlayground.unity
     guid: d8708d59aa39adc43abe9bebaad5d019
   - enabled: 1
+    path: Assets/Scenes/TestingPlaygroundwModels.unity
+    guid: 084bcc0b55946544f9ac5d3fbfb9af97
+  - enabled: 1
     path: Assets/Scenes/Game Over Screen.unity
     guid: 13cadaf5b30ba194db97713a74f2e84a
   - enabled: 1

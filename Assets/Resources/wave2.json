@@ -1,0 +1,9 @@
+{
+    "waveData": [
+        {
+            "amount": 3,
+            "enemyName": "Enemy",
+            "secondsBetweenSpawns": 3
+        }
+    ]
+}

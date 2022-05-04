@@ -39,8 +39,9 @@ public class DamageGardenOnTouch : MonoBehaviour
         if (collision.gameObject.CompareTag("Garden"))
         {
             collidedWithGarden.Invoke(Damage);
-        }
+
             if (destroyOnTouch)
-                Destroy(gameObject);
+                GetComponent<HealthScript>().Die();
+        }
     }
 }

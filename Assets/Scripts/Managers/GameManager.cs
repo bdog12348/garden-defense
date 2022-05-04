@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         uiHandler = GetComponent<UIHandler>();
         loader = GetComponent<SceneLoader>();
         uiHandler.Initialize(this);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -35,16 +36,18 @@ public class GameManager : MonoBehaviour
     {
         gardenHealth -= amount;
         uiHandler.UpdateGardenHealthUI(gardenHealth);
-        Debug.Log($"Garden is at {gardenHealth}");
+        //Debug.Log($"Garden is at {gardenHealth}");
     }
 
     public void WinGame()
     {
+        Cursor.lockState = CursorLockMode.None;
         loader.LoadScene("You Win Screen");
 
     }
     public void LoseGame()
     {
+        Cursor.lockState = CursorLockMode.None;
         loader.LoadScene("Game Over Screen");
 
     }

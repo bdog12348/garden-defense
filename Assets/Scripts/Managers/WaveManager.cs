@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
     {
         public int amount;
         public string enemyName;
+        public float secondsBetweenSpawns;
     }
 
     [System.Serializable]
@@ -29,40 +30,55 @@ public class WaveManager : MonoBehaviour
     // Used to not have to use Resource.Load everytime
     Dictionary<string, TextAsset> allWaveTexts = new Dictionary<string, TextAsset>();
     Dictionary<string, GameObject> allEnemyGos = new Dictionary<string, GameObject>();
-
+    
+    //Components
     WaveDataList currentWaveData;
     GameManager gameManager;
 
+    //Wave stuff
     float spawnTimer = float.MaxValue;
+    float spawnTimeToWait;
+    float waveTimer = 0;
+    string wavePrefix = "wave";
+    int waveNumber = 0;
+    int enemiesAlive = 0;
+    bool spawning = false;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GetComponent<GameManager>();
+        spawnTimeToWait = gameManager.GameSettings.enemySpawnTime;
 
         Preload();
-        LoadWave(allWaveTexts["wave1"]);
+        StartLoadNextWave();
     }
 
     private void Update()
     {
-        if (spawnTimer >= gameManager.GameSettings.timeBetweenWaves)
+        if (spawning)
         {
-            string nextEnemy = GetNextEnemy();
-            if (nextEnemy.Equals(""))
+            //Returns false when we run out of enemies
+            if (!SpawnWave())
             {
-                //Ran out of enemies, you win ig
-                //TODO: Change later to load in next wave json
-                gameManager.WinGame();
-            }else
-            {
-                SpawnEnemy(GetEnemyFromName(nextEnemy));
+                spawning = false;
             }
-            spawnTimer = 0f;
-        }else
+        }
+        else
         {
-            spawnTimer += Time.deltaTime;
+            if (enemiesAlive <= 0)
+            {
+                if (waveNumber == allWaveTexts.Keys.Count)
+                {
+                    //No more waves, you win the game
+                    gameManager.WinGame();
+                }
+                else
+                {
+                    StartLoadNextWave();
+                }
+            }
         }
     }
 
@@ -77,6 +93,9 @@ public class WaveManager : MonoBehaviour
         PreloadEnemies();
     }
 
+    /// <summary>
+    /// Loads all wave jsons into <see cref="allWaveTexts"/>
+    /// </summary>
     void PreloadWaves()
     {
         TextAsset[] textList = Resources.LoadAll<TextAsset>(pathToWavesFolder);
@@ -86,6 +105,9 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads all enemy types into <see cref="allEnemyGos"/>
+    /// </summary>
     void PreloadEnemies()
     {
         GameObject[] enemyGameObjectList = Resources.LoadAll<GameObject>(pathToEnemyFolder);
@@ -95,12 +117,47 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Given a <paramref name="enemyObject"/> spawns it in at a random spawn point and assigns their target
+    /// </summary>
+    /// <param name="enemyObject">Enemy GameObject to spawn in</param>
     void SpawnEnemy(GameObject enemyObject)
     {
         GameObject spawnedEnemy = Instantiate(enemyObject, spawnPointParent.GetChild(Random.Range(0, spawnPointParent.childCount)));
+        enemiesAlive++;
         spawnedEnemy.transform.SetParent(transform, true);
-
+        spawnedEnemy.GetComponent<HealthScript>().Died.AddListener(EnemyDied);
         spawnedEnemy.GetComponent<NavigationScript>().GetTarget();
+    }
+
+    /// <summary>
+    /// Handles spawning wave, returns false when there are no more enemies in wave
+    /// </summary>
+    /// <returns>False when there are no more enemies, true otherwise</returns>
+    bool SpawnWave()
+    {
+        if (spawnTimer >= spawnTimeToWait)
+        {
+            WaveData nextEnemy = GetNextEnemy();
+
+            if (nextEnemy == null)
+            {
+                return false;
+            }
+            else
+            {
+                string nextEnemyName = nextEnemy.enemyName;
+                SpawnEnemy(GetEnemyFromName(nextEnemyName));
+                spawnTimeToWait = nextEnemy.secondsBetweenSpawns;
+            }
+            spawnTimer = 0f;
+        }
+        else
+        {
+            spawnTimer += Time.deltaTime;
+        }
+
+        return true;
     }
 
     GameObject GetEnemyFromName(string enemyName)
@@ -115,7 +172,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    string GetNextEnemy()
+    WaveData GetNextEnemy()
     {
         if (currentWaveData != null)
         {
@@ -124,11 +181,36 @@ public class WaveManager : MonoBehaviour
                 if (currentWaveData.waveData[i].amount > 0)
                 {
                     currentWaveData.waveData[i].amount--;
-                    return currentWaveData.waveData[i].enemyName;
+                    return currentWaveData.waveData[i];
                 }
             }
         }
 
-        return "";
+        return null;
     }
+
+    void EnemyDied()
+    {
+        enemiesAlive--;
+    }
+
+    /// <summary>
+    /// Waits for time between seconds found in GameSettings and then spawns in next wave
+    /// </summary>
+    void StartLoadNextWave()
+    {
+        if (waveTimer >= gameManager.GameSettings.timeBetweenWaves)
+        {
+            waveNumber++;
+            Debug.Log($"Loading new wave: {waveNumber}");
+            LoadWave(allWaveTexts[wavePrefix + waveNumber.ToString()]);
+            spawning = true;
+            enemiesAlive = 0;
+        }
+        else
+        {
+            waveTimer += Time.deltaTime;
+        }
+    }
+
 }

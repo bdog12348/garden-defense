@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+
     public GameObject wep;
     public bool CanAttack = true;
     public float AttackCooldown = 1.0f;
@@ -26,12 +27,13 @@ public class WeaponController : MonoBehaviour
         isAttacking = true;
         CanAttack = false;
         StartCoroutine(ResetAttackCooldown());
+        Debug.Log("ATTACKING");
     }
 
     IEnumerator ResetAttackCooldown() 
     {
-        isAttacking = false;
         yield return new WaitForSeconds(AttackCooldown);
+        isAttacking = false;
         CanAttack = true;
     }
 }
