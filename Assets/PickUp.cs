@@ -15,6 +15,7 @@ public class PickUp : MonoBehaviour
     {
         if (inputs.pickup) 
         {
+            Debug.Log("E pressed");
             if (this.transform.parent != null) // if currently holding, drop current wep
             {
                 prevWep = this.transform;
