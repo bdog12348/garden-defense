@@ -14,7 +14,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Pickupable
   - Water
   - UI
   - Environment
