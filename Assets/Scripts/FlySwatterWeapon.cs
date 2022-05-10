@@ -16,4 +16,17 @@ public class FlySwatterWeapon : WeaponBase
         base.WepAttack();
         animator.SetTrigger("Attack");
     }
+
+    public override bool CanAttackType(GameObject other)
+    {
+        EnemyType type = other.GetComponent<EnemyType>();
+        if (type.GetEnemyType() == EnemyType.Type.Beetle)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

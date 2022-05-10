@@ -42,4 +42,6 @@ public abstract class WeaponBase : MonoBehaviour
         isAttacking = false;
         CanAttack = true;
     }
+
+    public abstract bool CanAttackType(GameObject other);
 }

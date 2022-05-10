@@ -9,6 +9,8 @@ public class WeaponPick : MonoBehaviour
     GameObject currentWep;
     GameObject wp;
 
+    Vector3 weaponBaseLocation;
+    Quaternion weaponBaseRotation;
     bool canGrab;
 
     void Update()
@@ -55,8 +57,15 @@ public class WeaponPick : MonoBehaviour
     private void pickup() 
     {
         currentWep = wp;
-        currentWep.GetComponent<Rigidbody>().useGravity = false;
+        //currentWep.GetComponent<Rigidbody>().useGravity = false;
         currentWep.GetComponent<Rigidbody>().freezeRotation = true;
+        WeaponBase weaponBase = currentWep.GetComponent<WeaponBase>();
+        if (weaponBase != null)
+        {
+            weaponBase.enabled = true;
+        }
+        weaponBaseLocation = currentWep.transform.position;
+        weaponBaseRotation = currentWep.transform.rotation;
 
         currentWep.transform.position = equipPosition.position;
         currentWep.transform.parent = equipPosition;
@@ -65,11 +74,19 @@ public class WeaponPick : MonoBehaviour
 
     private void drop() 
     {
-        currentWep.GetComponent<Rigidbody>().useGravity = true;
+        //currentWep.GetComponent<Rigidbody>().useGravity = true;
         currentWep.GetComponent<Rigidbody>().freezeRotation = false;
+
+        WeaponBase weaponBase = currentWep.GetComponent<WeaponBase>();
+        if (weaponBase != null)
+        {
+            weaponBase.enabled = false;
+        }
 
         currentWep.transform.parent = null;
         currentWep.GetComponent<Rigidbody>().isKinematic = false;
+        currentWep.transform.rotation = weaponBaseRotation;
+        currentWep.transform.position = weaponBaseLocation;
         currentWep = null;
     }
 }

@@ -17,8 +17,11 @@ public class CollisionDetection : MonoBehaviour
         {
             Debug.Log(transform.parent);
             Debug.Log(other.name); //see what enemy we're hitting
-            other.GetComponent<HealthScript>().TakeDamage(wc.GetDamage());
-            tookDamage = true;
+            if (wc.CanAttackType(other.gameObject))
+            {
+                other.GetComponent<HealthScript>().TakeDamage(wc.GetDamage());
+                tookDamage = true;
+            }
         }else if (wc.isAttacking == false)
         {
             tookDamage = false;
