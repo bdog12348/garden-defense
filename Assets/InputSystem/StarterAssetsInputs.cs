@@ -14,6 +14,7 @@ namespace StarterAssets
 		public bool sprint;
 		public bool pickup;
 		public bool drop;
+		public bool quit;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -57,6 +58,11 @@ namespace StarterAssets
         {
 			DropInput(value.isPressed);
         }
+
+		public void OnQuit(InputValue value)
+        {
+			QuitInput(value.isPressed);
+        }
 #else
 	// old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -90,6 +96,11 @@ namespace StarterAssets
 		public void DropInput(bool dropState)
         {
 			drop = dropState;
+        }
+
+		public void QuitInput(bool quitState)
+        {
+			quit = quitState;
         }
 
 #if !UNITY_IOS || !UNITY_ANDROID

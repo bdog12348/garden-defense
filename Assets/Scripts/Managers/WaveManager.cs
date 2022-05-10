@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] string pathToEnemyFolder = "";
     [SerializeField] string pathToWavesFolder = "";
     [SerializeField] Transform spawnPointParent;
+    [SerializeField] TextMeshProUGUI waveText;
     #endregion
 
     #region Private Fields
@@ -203,6 +205,7 @@ public class WaveManager : MonoBehaviour
         {
             waveNumber++;
             Debug.Log($"Loading new wave: {waveNumber}");
+            waveText.text = waveNumber.ToString();
             LoadWave(allWaveTexts[wavePrefix + waveNumber.ToString()]);
             spawning = true;
             enemiesAlive = 0;

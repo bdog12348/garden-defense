@@ -98,6 +98,11 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+
+			if (_input.quit)
+            {
+				Application.Quit();
+            }
 		}
 
 		private void LateUpdate()
