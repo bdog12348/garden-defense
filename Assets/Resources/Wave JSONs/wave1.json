@@ -2,8 +2,8 @@
     "waveData": [
         {
             "amount": 6,
-            "enemyName": "Enemy",
-            "secondsBetweenSpawns": 10
+            "enemyName": "Raccoon",
+            "secondsBetweenSpawns": 6
         }
     ]
 }

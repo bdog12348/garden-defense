@@ -9,6 +9,7 @@ public class FlySwatterWeapon : WeaponBase
     private void Start()
     {
         animator = GetComponent<Animator>();
+        AttackCooldown = .35f;
     }
 
     public override void WepAttack()

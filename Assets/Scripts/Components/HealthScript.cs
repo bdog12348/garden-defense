@@ -9,11 +9,13 @@ public class HealthScript : MonoBehaviour
     [Header("Health Variables")]
     float health;
     [SerializeField] float maxHealth = 10f;
+    [SerializeField] float invulnerableTime = .5f;
+    float currentInvulnerableTime = 0f;
 
     [Header("Events")]
     public UnityEvent Died;
 
-
+    public MMFeedbacks damageFeedback;
     public MMFeedbacks killFeedback;
 
     // Start is called before the first frame update
@@ -32,6 +34,11 @@ public class HealthScript : MonoBehaviour
         {
             Die();
         }
+
+        if (currentInvulnerableTime > 0f)
+        {
+            currentInvulnerableTime -= Time.deltaTime;
+        }
     }
 
     public void TakeDamage(float amount)
@@ -41,8 +48,12 @@ public class HealthScript : MonoBehaviour
             Debug.LogError("Damage must be greater than 0");
             return;
         }
-        Debug.Log($"Took damage {amount}");
+        if (currentInvulnerableTime > 0f)
+            return;
 
+        damageFeedback?.PlayFeedbacks();
+        Debug.Log($"Took damage {amount}");
+        currentInvulnerableTime = invulnerableTime; 
         health -= amount;
     }
 

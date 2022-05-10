@@ -22,7 +22,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void WepAttack() //add animation and audio here later
+    public void WepAttack()
     {
         isAttacking = true;
         CanAttack = false;

@@ -38,12 +38,11 @@ public class WeaponPick : MonoBehaviour
     private void CheckWeapons() 
     {
         RaycastHit hit;
-
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, distance))
         {
             if (hit.transform.tag == "Weapon")
             {
-                Debug.Log("Grabbable");
+                Debug.Log($"Grabbable, {hit.transform.name}");
                 canGrab = true;
                 wp = hit.transform.gameObject;
             }
@@ -56,37 +55,68 @@ public class WeaponPick : MonoBehaviour
 
     private void pickup() 
     {
+        //Set new current weapon
         currentWep = wp;
-        //currentWep.GetComponent<Rigidbody>().useGravity = false;
-        currentWep.GetComponent<Rigidbody>().freezeRotation = true;
+
+        //Make it so that raycast will not hit currently held weapon
+        SetLayerRecursively(currentWep, LayerMask.NameToLayer("Ignore Raycast"));
+
+        /*
+            Enable weaponbase script of whatever weapon we are holding
+            Every weapon should have their own version of a weapon script, even if its just empty
+            Currently every weapon controls themselves for attacking, might want to change that to being controlled in the player controls later
+        */
         WeaponBase weaponBase = currentWep.GetComponent<WeaponBase>();
         if (weaponBase != null)
         {
             weaponBase.enabled = true;
         }
+
+        //Store location of where we grabbed the weapon to put it back when we drop it
         weaponBaseLocation = currentWep.transform.position;
         weaponBaseRotation = currentWep.transform.rotation;
 
-        currentWep.transform.position = equipPosition.position;
+        //currentWep.GetComponent<Rigidbody>().useGravity = false;
+        //currentWep.GetComponent<Rigidbody>().freezeRotation = true;
+
+        //Move weapon to location of player
         currentWep.transform.parent = equipPosition;
+        currentWep.transform.position = equipPosition.position;
         currentWep.transform.rotation = equipPosition.rotation;
     }
 
     private void drop() 
     {
-        //currentWep.GetComponent<Rigidbody>().useGravity = true;
-        currentWep.GetComponent<Rigidbody>().freezeRotation = false;
+        //Put weapon back on layer where we can raycast it 
+        SetLayerRecursively(currentWep, LayerMask.NameToLayer("Pickupable"));
 
+        //Disable weaponbase script so it doesn't attack while we aren't holding it
         WeaponBase weaponBase = currentWep.GetComponent<WeaponBase>();
         if (weaponBase != null)
         {
             weaponBase.enabled = false;
         }
 
+        //Commented out rigidbody stuff since we just will not use gravity on weapons
+        //currentWep.GetComponent<Rigidbody>().useGravity = true;
+        //currentWep.GetComponent<Rigidbody>().freezeRotation = false;
+        //currentWep.GetComponent<Rigidbody>().isKinematic = false;
+        
+        //Move weapon back to its original location and unparent
         currentWep.transform.parent = null;
-        currentWep.GetComponent<Rigidbody>().isKinematic = false;
         currentWep.transform.rotation = weaponBaseRotation;
         currentWep.transform.position = weaponBaseLocation;
+
+        //Reset currentWep
         currentWep = null;
+    }
+
+    void SetLayerRecursively(GameObject gameObject, int layer)
+    {
+        gameObject.layer = layer;
+        foreach(Transform t in gameObject.transform)
+        {
+            SetLayerRecursively(t.gameObject, layer);
+        }
     }
 }
