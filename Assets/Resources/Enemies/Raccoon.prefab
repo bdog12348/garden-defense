@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Method: 0
   TargetGameObject: {fileID: 1025685383930226615}
-  TargetRenderer: {fileID: 1529828713692595810}
+  TargetRenderer: {fileID: 0}
   ShaderPropertyName: _Color
   OffValue: 0
   OnValue: 1
@@ -210,11 +210,11 @@ MonoBehaviour:
   ForceStateOnExit: 1
   StateOnExit: 0
   TimescaleMode: 0
-  RepeatCount: 2
+  RepeatCount: 4
   Phases:
-  - PhaseDuration: 0.5
-    OffDuration: 0.25
-    OnDuration: 0.25
+  - PhaseDuration: 0.25
+    OffDuration: 0.15
+    OnDuration: 0.1
     OffLerpDuration: 0
     OnLerpDuration: 0
   ToggleBlinkingButton: 0
@@ -591,10 +591,5 @@ GameObject:
 --- !u!4 &391856876302171405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f42c92a026f9b4141824d3bf04b0ba43, type: 3}
-  m_PrefabInstance: {fileID: 214658470135569126}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1529828713692595810 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f42c92a026f9b4141824d3bf04b0ba43, type: 3}
   m_PrefabInstance: {fileID: 214658470135569126}
   m_PrefabAsset: {fileID: 0}

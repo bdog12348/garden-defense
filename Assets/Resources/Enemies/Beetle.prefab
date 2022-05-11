@@ -210,11 +210,11 @@ MonoBehaviour:
   ForceStateOnExit: 1
   StateOnExit: 0
   TimescaleMode: 0
-  RepeatCount: 2
+  RepeatCount: 4
   Phases:
-  - PhaseDuration: 0.5
-    OffDuration: 0.25
-    OnDuration: 0.25
+  - PhaseDuration: 0.25
+    OffDuration: 0.125
+    OnDuration: 0.125
     OffLerpDuration: 0
     OnLerpDuration: 0
   ToggleBlinkingButton: 0
