@@ -129,7 +129,6 @@ public class WaveManager : MonoBehaviour
         enemiesAlive++;
         spawnedEnemy.transform.SetParent(transform, true);
         spawnedEnemy.GetComponent<HealthScript>().Died.AddListener(EnemyDied);
-        spawnedEnemy.GetComponent<NavigationScript>().GetTarget();
     }
 
     /// <summary>

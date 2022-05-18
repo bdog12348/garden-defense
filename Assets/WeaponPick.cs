@@ -15,11 +15,10 @@ public class WeaponPick : MonoBehaviour
 
     void Update()
     {
-        CheckWeapons();
-
-        if (canGrab) 
+            CheckWeapons(); 
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E)) 
+            if (canGrab)
             {
                 Debug.Log("Pressing E");
                 if (currentWep != null)
@@ -45,11 +44,13 @@ public class WeaponPick : MonoBehaviour
                 Debug.Log($"Grabbable, {hit.transform.name}");
                 canGrab = true;
                 wp = hit.transform.gameObject;
+                wp.GetComponent<PopupController>().ShowPopup();
             }
         }
         else 
         {
             canGrab = false;
+            wp.GetComponent<PopupController>().HidePopup();
         }
     }
 

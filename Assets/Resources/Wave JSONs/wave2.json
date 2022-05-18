@@ -3,12 +3,12 @@
         {
             "amount": 3,
             "enemyName": "Beetle",
-            "secondsBetweenSpawns": 5
+            "secondsBetweenSpawns": 3
         },
         {
             "amount": 2,
             "enemyName": "Raccoon",
-            "secondsBetweenSpawns": 10
+            "secondsBetweenSpawns": 6
         }
     ]
 }

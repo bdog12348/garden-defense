@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 1727781852930994575}
   - component: {fileID: 1727781852930994572}
   - component: {fileID: 1727781852930994573}
+  - component: {fileID: 8430754856766013690}
   - component: {fileID: 1727781852930994570}
   - component: {fileID: 563059190383770593}
-  - component: {fileID: -5581606093458561396}
   - component: {fileID: 4647365981130421876}
   - component: {fileID: 6873503859102438133}
   - component: {fileID: 429285663302239247}
+  - component: {fileID: 6134231618995844229}
   m_Layer: 7
   m_Name: Raccoon
   m_TagString: Enemy
@@ -66,7 +67,7 @@ NavMeshAgent:
   m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -75,6 +76,21 @@ NavMeshAgent:
   m_BaseOffset: 0.64
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8430754856766013690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727781852930994571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd214cea7c1e4fe44b2ff9ede3bf80a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runAwaySpeed: 4
+  normalSpeed: 2
+  runAwayDistance: 15
 --- !u!114 &1727781852930994570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,6 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  ReachedDestination:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &563059190383770593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,30 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 497fbfa830295d04d8a99bb577cbca83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 10
   invulnerableTime: 1
   Died:
     m_PersistentCalls:
       m_Calls: []
   damageFeedback: {fileID: 7306088096061160432}
   killFeedback: {fileID: 0}
---- !u!114 &-5581606093458561396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1727781852930994571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be044ab5eb1ab4943ab029fc5d3b3d25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  destroyOnTouch: 1
-  collidedWithGarden:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!54 &4647365981130421876
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -222,6 +224,19 @@ MonoBehaviour:
   StopBlinkingButton: 0
   Active: 0
   CurrentPhaseIndex: 0
+--- !u!135 &6134231618995844229
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727781852930994571}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2193622704062504499
 GameObject:
   m_ObjectHideFlags: 0
