@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool Paused = false;
+
     [SerializeField] GameSettingsSO gameSettings;
 
     public GameSettingsSO GameSettings { get => gameSettings; set => gameSettings = value; }
@@ -20,7 +22,6 @@ public class GameManager : MonoBehaviour
         uiHandler = GetComponent<UIHandler>();
         loader = GetComponent<SceneLoader>();
         uiHandler.Initialize(this);
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -29,6 +30,14 @@ public class GameManager : MonoBehaviour
         if (gardenHealth <= 0)
         {
             LoseGame();
+        }
+
+        if (Paused)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 

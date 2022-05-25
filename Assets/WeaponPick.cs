@@ -6,6 +6,8 @@ public class WeaponPick : MonoBehaviour
 {
     public Transform equipPosition;
     public float distance = 10f;
+
+    [SerializeField] CrosshairController crosshair;
     GameObject currentWep;
     GameObject wp;
 
@@ -15,7 +17,11 @@ public class WeaponPick : MonoBehaviour
 
     void Update()
     {
-            CheckWeapons(); 
+        if (GameManager.Paused)
+            return;
+
+        CheckWeapons();
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (canGrab)
@@ -43,14 +49,25 @@ public class WeaponPick : MonoBehaviour
             {
                 Debug.Log($"Grabbable, {hit.transform.name}");
                 canGrab = true;
-                wp = hit.transform.gameObject;
+                if (wp != null)
+                {
+                    if (!hit.transform.gameObject.Equals(wp))
+                    {
+                        wp.GetComponent<PopupController>().HidePopup();
+                        wp = hit.transform.gameObject;
+                    }
+                }else
+                {
+                    wp = hit.transform.gameObject;
+                }
+
                 wp.GetComponent<PopupController>().ShowPopup();
             }
         }
         else 
         {
             canGrab = false;
-            wp.GetComponent<PopupController>().HidePopup();
+            wp?.GetComponent<PopupController>().HidePopup();
         }
     }
 
@@ -71,14 +88,12 @@ public class WeaponPick : MonoBehaviour
         if (weaponBase != null)
         {
             weaponBase.enabled = true;
+            weaponBase.SetCrosshairController(crosshair);
         }
 
         //Store location of where we grabbed the weapon to put it back when we drop it
         weaponBaseLocation = currentWep.transform.position;
         weaponBaseRotation = currentWep.transform.rotation;
-
-        //currentWep.GetComponent<Rigidbody>().useGravity = false;
-        //currentWep.GetComponent<Rigidbody>().freezeRotation = true;
 
         //Move weapon to location of player
         currentWep.transform.parent = equipPosition;
@@ -95,13 +110,8 @@ public class WeaponPick : MonoBehaviour
         WeaponBase weaponBase = currentWep.GetComponent<WeaponBase>();
         if (weaponBase != null)
         {
-            weaponBase.enabled = false;
+            weaponBase.Disable();
         }
-
-        //Commented out rigidbody stuff since we just will not use gravity on weapons
-        //currentWep.GetComponent<Rigidbody>().useGravity = true;
-        //currentWep.GetComponent<Rigidbody>().freezeRotation = false;
-        //currentWep.GetComponent<Rigidbody>().isKinematic = false;
         
         //Move weapon back to its original location and unparent
         currentWep.transform.parent = null;

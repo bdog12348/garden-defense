@@ -97,14 +97,14 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
+			if (GameManager.Paused)
+            {
+				_rotationVelocity = 0f;
+            }
+
+			//JumpAndGravity();
 			GroundedCheck();
 			Move();
-
-			if (_input.quit)
-            {
-				Application.Quit();
-            }
 		}
 
 		private void LateUpdate()
@@ -121,6 +121,9 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
+			if (GameManager.Paused)
+				return;
+
 			// if there is an input
 			if (_input.look.sqrMagnitude >= _threshold)
 			{
