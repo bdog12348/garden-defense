@@ -26,6 +26,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] string pathToWavesFolder = "";
     [SerializeField] Transform spawnPointParent;
     [SerializeField] TextMeshProUGUI waveText;
+    [SerializeField] GameObject playerGameObject;
+    [SerializeField] float distanceToPlaySound = 5f;
     #endregion
 
     #region Private Fields
@@ -125,10 +127,15 @@ public class WaveManager : MonoBehaviour
     /// <param name="enemyObject">Enemy GameObject to spawn in</param>
     void SpawnEnemy(GameObject enemyObject)
     {
-        GameObject spawnedEnemy = Instantiate(enemyObject, spawnPointParent.GetChild(Random.Range(0, spawnPointParent.childCount)));
+        Transform randomPosition = spawnPointParent.GetChild(Random.Range(0, spawnPointParent.childCount));
+        GameObject spawnedEnemy = Instantiate(enemyObject, randomPosition);
         enemiesAlive++;
         spawnedEnemy.transform.SetParent(transform, true);
         spawnedEnemy.GetComponent<HealthScript>().Died.AddListener(EnemyDied);
+        float distanceToPlayer = Vector3.Distance(randomPosition.position, playerGameObject.transform.position);
+        Debug.Log(distanceToPlayer);
+        if (distanceToPlayer >= distanceToPlaySound)
+            AudioSystem.Instance.PlaySound(AudioSystem.Sound.EnemyFarSpawn);
     }
 
     /// <summary>

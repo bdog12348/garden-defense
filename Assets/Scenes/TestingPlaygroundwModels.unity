@@ -622,7 +622,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 143288121}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseSystem, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
@@ -688,6 +688,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb131549f7509404cb03d16865560f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &143288119 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8779409498464307095, guid: 3172097b60c9128499d32ec933a01985, type: 3}
+  m_PrefabInstance: {fileID: 8779409497951971165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &143288120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,21 +708,6 @@ MonoBehaviour:
   TargetFPS: 150
   RenderFrameInterval: 0
   VSyncCount: 0
---- !u!114 &143288121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 143288114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5683e198f56785b4ca1d0983e4b43acb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenuObject: {fileID: 434866181}
-  sensitivitySlider: {fileID: 903845198}
-  firstPersonController: {fileID: 5393215579111688476}
 --- !u!1 &154519804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,6 +1861,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372414086}
   m_CullTransparentMesh: 1
+--- !u!1 &374213384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 374213385}
+  - component: {fileID: 374213386}
+  m_Layer: 0
+  m_Name: Pause System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &374213385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374213384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 143288119}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &374213386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374213384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5683e198f56785b4ca1d0983e4b43acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuObject: {fileID: 434866181}
+  sensitivitySlider: {fileID: 903845198}
+  firstPersonController: {fileID: 5393215579111688476}
 --- !u!1001 &387036709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7517,6 +7553,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5037d6ea184d2f640bf78dcf9894a269, type: 3}
+--- !u!1 &1181186943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1181186944}
+  - component: {fileID: 1181186945}
+  m_Layer: 0
+  m_Name: Audio System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1181186944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181186943}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 143288119}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1181186945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181186943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51c128bcdf23ef3469d45bd67a930b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundsScriptableObject: {fileID: 11400000, guid: 2838e2032e376fc45b5a6f8639d6b751, type: 2}
 --- !u!1 &1192288404
 GameObject:
   m_ObjectHideFlags: 0
@@ -10586,7 +10666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430821, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: field of view
-      value: 60
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430821, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_FocalLength
@@ -11196,6 +11276,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 8338988565591873055}
+    - target: {fileID: 8762286023885395323, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 8762286024517199034, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: Damping.x
       value: 0.05
@@ -11308,12 +11392,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 878904361}
     - target: {fileID: 3771392648776318954, guid: 3172097b60c9128499d32ec933a01985, type: 3}
+      propertyPath: playerGameObject
+      value: 
+      objectReference: {fileID: 5393215579111688472}
+    - target: {fileID: 3771392648776318954, guid: 3172097b60c9128499d32ec933a01985, type: 3}
       propertyPath: spawnPointParent
       value: 
       objectReference: {fileID: 112442134}
+    - target: {fileID: 3771392648776318954, guid: 3172097b60c9128499d32ec933a01985, type: 3}
+      propertyPath: distanceToPlaySound
+      value: 35
+      objectReference: {fileID: 0}
     - target: {fileID: 8779409498464307093, guid: 3172097b60c9128499d32ec933a01985, type: 3}
       propertyPath: m_Name
-      value: GameManager
+      value: Game Manager
       objectReference: {fileID: 0}
     - target: {fileID: 8779409498464307095, guid: 3172097b60c9128499d32ec933a01985, type: 3}
       propertyPath: m_RootOrder
